@@ -2,6 +2,7 @@ package com.zdd.opencvdemo;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,9 +31,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             imageView.setImageBitmap(bitmap);
         } else {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test);
-            imageView.setImageBitmap(opBitmap(bitmap,Bitmap.Config.ARGB_8888));
+            Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.test2);
+//            imageView.setImageBitmap(cvtBitmap(bitmap,Bitmap.Config.ARGB_8888));
+
+
+            imageView.setImageBitmap(matchBitmap(bitmap,bitmap2,Bitmap.Config.ARGB_8888,5));
+
         }
     }
 
-    public native Bitmap opBitmap(Bitmap bitmap, Bitmap.Config argb8888);
+    //图片灰度化
+    public native Bitmap cvtBitmap(Bitmap bitmap, Bitmap.Config argb8888);
+
+    //图片匹配，match采用5效果最好
+    public native Bitmap matchBitmap(Bitmap bigBitmap,Bitmap smallBitmap, Bitmap.Config argb8888,int match);
 }
