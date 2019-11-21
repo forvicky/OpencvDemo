@@ -9,9 +9,9 @@
 
  - [x] opencv文字区域检测
 
- - [] opencv人脸检测
+ - [ ] opencv人脸检测
 
- - [] opencv文字识别
+ - [ ] opencv文字识别
 
 
 
