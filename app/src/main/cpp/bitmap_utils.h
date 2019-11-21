@@ -8,6 +8,8 @@
 using namespace cv;//Mat
 
 extern "C" {
+
+
     /**
      * Bitmap 转矩阵
      * @param env JNI环境
@@ -15,7 +17,7 @@ extern "C" {
      * @param mat 图片矩阵
      * @param needPremultiplyAlpha 是否前乘透明度
      */
-void bitmap2Mat(JNIEnv *env, jobject bitmap, Mat *mat, bool needPremultiplyAlpha = false);
+void bitmap2Mat(JNIEnv *env, jobject bitmap, Mat *mat, bool needPremultiplyAlpha = false,int type=CV_8UC4);
 
 /**
  * 矩阵转Bitmap

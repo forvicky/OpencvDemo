@@ -27,15 +27,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.show) {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test4);
             imageView.setImageBitmap(bitmap);
         } else {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test4);
             Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.test2);
 //            imageView.setImageBitmap(cvtBitmap(bitmap,Bitmap.Config.ARGB_8888));
 
 
-            imageView.setImageBitmap(matchBitmap(bitmap,bitmap2,Bitmap.Config.ARGB_8888,5));
+//            imageView.setImageBitmap(matchBitmap(bitmap,bitmap2,Bitmap.Config.ARGB_8888,5));
+
+            imageView.setImageBitmap(txtAreaBitmap(bitmap,Bitmap.Config.ARGB_8888));
 
         }
     }
@@ -45,4 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //图片匹配，match采用5效果最好
     public native Bitmap matchBitmap(Bitmap bigBitmap,Bitmap smallBitmap, Bitmap.Config argb8888,int match);
+
+    //图片提取文字区域,只能识别出简单的黑白图片
+    public native Bitmap txtAreaBitmap(Bitmap bitmap, Bitmap.Config argb8888);
 }

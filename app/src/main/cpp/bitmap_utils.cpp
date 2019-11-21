@@ -1,6 +1,7 @@
 #include "bitmap_utils.h"
 
-void bitmap2Mat(JNIEnv *env, jobject bitmap, Mat *mat, bool needPremultiplyAlpha) {
+
+void bitmap2Mat(JNIEnv *env, jobject bitmap, Mat *mat, bool needPremultiplyAlpha,int type) {
     AndroidBitmapInfo info;
     void *pixels = 0;
     Mat &dst = *mat;
@@ -11,16 +12,16 @@ void bitmap2Mat(JNIEnv *env, jobject bitmap, Mat *mat, bool needPremultiplyAlpha
     CV_Assert(AndroidBitmap_lockPixels(env, bitmap, &pixels) >= 0);
     CV_Assert(pixels);
 
-    dst.create(info.height, info.width, CV_8UC4);
+    dst.create(info.height, info.width, type);
     if (info.format == ANDROID_BITMAP_FORMAT_RGBA_8888) {
-        Mat tmp(info.height, info.width, CV_8UC4, pixels);
+        Mat tmp(info.height, info.width, type, pixels);
         if (needPremultiplyAlpha) {
             cvtColor(tmp, dst, COLOR_mRGBA2RGBA);
         } else {
             tmp.copyTo(dst);
         }
     } else {
-        Mat tmp(info.height, info.width, CV_8UC2, pixels);
+        Mat tmp(info.height, info.width, type, pixels);
         cvtColor(tmp, dst, COLOR_BGR5652RGBA);
     }
     AndroidBitmap_unlockPixels(env, bitmap);
