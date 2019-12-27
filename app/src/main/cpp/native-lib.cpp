@@ -64,7 +64,7 @@ Java_com_zdd_opencvdemo_MainActivity_matchBitmap(JNIEnv *env, jobject instance, 
 
     LOGD("minValue=%f    maxValue=%f",minValue,maxValue);
 
-    //【5】对于方法 SQDIFF 和 SQDIFF_NORMED, 越小的数值有着更高的匹配结果. 而其余的方法, 数值越大匹配效果越好
+    //对于方法 SQDIFF 和 SQDIFF_NORMED, 越小的数值有着更高的匹配结果. 而其余的方法, 数值越大匹配效果越好
 
     if (match_method == CV_TM_SQDIFF || match_method == CV_TM_SQDIFF_NORMED) {
         matchLocation = minLocation;
@@ -72,8 +72,8 @@ Java_com_zdd_opencvdemo_MainActivity_matchBitmap(JNIEnv *env, jobject instance, 
         matchLocation = maxLocation;
     }
 
-    //【6】绘制出矩形，并显示最终结果
-    rectangle(bigMat, matchLocation, Point(matchLocation.x + smallMat.cols, matchLocation.y + smallMat.rows), Scalar(0, 0, 255), 2, 8, 0);
+    //绘制出矩形，并显示最终结果
+    rectangle(bigMat, matchLocation, Point(matchLocation.x + smallMat.cols, matchLocation.y + smallMat.rows), Scalar(166, 166, 200), 2, 8, 0);
 //    rectangle(resultMat, matchLocation, Point(matchLocation.x + smallMat.cols, matchLocation.y + smallMat.rows), Scalar(0, 0, 255), 2, 8, 0);
 
     return createBitmap(env,bigMat , argb8888);//使用dstMat创建一个Bitmap对象

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             imageView.setImageBitmap(bitmap);
         } else {
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test9);
-            Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.test11);
+            Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.test14);
 //            imageView.setImageBitmap(cvtBitmap(bitmap,Bitmap.Config.ARGB_8888));
 
 
