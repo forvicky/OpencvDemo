@@ -3,13 +3,19 @@
 #include <vector>
 #include <opencv2/imgproc/types_c.h>
 #include <opencv2/core/hal/interface.h>
+#include "opencv2/highgui/highgui.hpp"
+#include <opencv2/features2d/features2d.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/core/core.hpp>
 #include "bitmap_utils.h"
 #include "FaceDector.h"
 #include "TxtDector.h"
+#include "my_log.h"
 
 using namespace std;
 
-
+double compareMatHist(JNIEnv *env,Mat smallMat,Mat resultMat,jobject argb8888);
 
 extern "C"
 JNIEXPORT jobject JNICALL
@@ -21,6 +27,9 @@ Java_com_zdd_opencvdemo_MainActivity_cvtBitmap(JNIEnv *env, jobject instance, jo
     cvtColor(srcMat, dstMat, CV_BGR2GRAY);//将图片的像素信息灰度化盛放在dstMat
     return createBitmap(env, dstMat, argb8888);//使用dstMat创建一个Bitmap对象
 }
+
+
+
 
 extern "C"
 JNIEXPORT jobject JNICALL
@@ -41,8 +50,8 @@ Java_com_zdd_opencvdemo_MainActivity_matchBitmap(JNIEnv *env, jobject instance, 
 
     //TM_CCOEFF_NORMED
     matchTemplate(bigMat, smallMat, resultMat, match_method);
-    //normalize查找全局最小和最大稀疏数组元素并返回其值及其位置
-    normalize(resultMat, resultMat, 0, 1, NORM_MINMAX, -1);
+    //normalize查找全局最小和最大稀疏数组元素并返回其值及其位置,这行代码返回的minval和maxval永远是0和1
+//    normalize(resultMat, resultMat, 0, 2, NORM_MINMAX, -1,Mat());
 
     double minValue;
     double maxValue;
@@ -51,6 +60,9 @@ Java_com_zdd_opencvdemo_MainActivity_matchBitmap(JNIEnv *env, jobject instance, 
     Point matchLocation;
 
     minMaxLoc(resultMat, &minValue, &maxValue, &minLocation, &maxLocation, Mat());
+
+
+    LOGD("minValue=%f    maxValue=%f",minValue,maxValue);
 
     //【5】对于方法 SQDIFF 和 SQDIFF_NORMED, 越小的数值有着更高的匹配结果. 而其余的方法, 数值越大匹配效果越好
 
@@ -64,8 +76,9 @@ Java_com_zdd_opencvdemo_MainActivity_matchBitmap(JNIEnv *env, jobject instance, 
     rectangle(bigMat, matchLocation, Point(matchLocation.x + smallMat.cols, matchLocation.y + smallMat.rows), Scalar(0, 0, 255), 2, 8, 0);
 //    rectangle(resultMat, matchLocation, Point(matchLocation.x + smallMat.cols, matchLocation.y + smallMat.rows), Scalar(0, 0, 255), 2, 8, 0);
 
-    return createBitmap(env, bigMat, argb8888);//使用dstMat创建一个Bitmap对象
+    return createBitmap(env,bigMat , argb8888);//使用dstMat创建一个Bitmap对象
 }
+
 
 extern "C"
 JNIEXPORT jobject JNICALL

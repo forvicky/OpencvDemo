@@ -39,21 +39,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.show) {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test8);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test9);
             imageView.setImageBitmap(bitmap);
         } else {
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test8);
-            Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.test2);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test9);
+            Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.test11);
 //            imageView.setImageBitmap(cvtBitmap(bitmap,Bitmap.Config.ARGB_8888));
 
 
-//            imageView.setImageBitmap(matchBitmap(bitmap,bitmap2,Bitmap.Config.ARGB_8888,5));
+            imageView.setImageBitmap(matchBitmap(bitmap,bitmap2,Bitmap.Config.ARGB_8888,5));
 
 //            imageView.setImageBitmap(txtAreaBitmap(bitmap,Bitmap.Config.ARGB_8888));
 
-            int size=faceDetector(bitmap,Bitmap.Config.ARGB_8888,mCascade.getAbsolutePath());
-            imageView.setImageBitmap(bitmap);
-            Log.d("zddHttp","size="+size);
+//            int size=faceDetector(bitmap,Bitmap.Config.ARGB_8888,mCascade.getAbsolutePath());
+//            imageView.setImageBitmap(bitmap);
+//            Log.d("zddHttp","size="+size);
         }
     }
 
